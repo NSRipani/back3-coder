@@ -34,7 +34,6 @@ class ServiceMock{
         for(let i = 0; i < num; i++) {
             users.push({
                 first_name: faker.person.firstName(),
-                last_name: faker.person.lastName(),
                 email: faker.internet.email(),
                 password: await createHash("coder123"),
                 role: faker.helpers.arrayElement(["user", "admin"]),
