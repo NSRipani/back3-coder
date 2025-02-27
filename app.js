@@ -1,11 +1,11 @@
 import express from 'express'
 import cookieParser from 'cookie-parser';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import router from './src/routes/index.route.js';
 import dbConnect from './src/db/db.js';
 import { createServer } from 'http';
 
-dotenv.config()
+// dotenv.config()
 const app = express()
 
 app.use(express.json())
