@@ -12,7 +12,6 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser());
 
-
 const port = process.env.PORT || 3000;
 const ready = () => {
     console.log("server ready on port " + port);

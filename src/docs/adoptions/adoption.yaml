@@ -1,0 +1,107 @@
+paths:
+  /api/adoptions:
+    get:
+      tags:
+        - Adoptions
+      summary: Get all adoptions
+      description: Retrieve a list of all adoptions
+      responses:
+        '200':
+          description: A list of adoptions
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  type: object
+                  properties:
+                    owner:
+                      type: string
+                      description: User ID (ObjectId)
+                      example: 60d0fe4f5311236168a109ca
+                    pet:
+                      type: string
+                      description: Pet ID (ObjectId)
+                      example: 60d0fe4f5311236168a109cb
+                    status:
+                      type: string
+                      description: Status of the adoption
+                      example: completed
+        '400':
+          description: Bad Request
+  /api/adoption/{aid}:
+    get:
+      tags:
+        - Adoptions
+      summary: Get adoption by ID
+      description: Retrieve an adoption by ID
+      parameters:
+        - in: path
+          name: aid
+          required: true
+          description: Adoption ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A single adoption
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  owner:
+                    type: string
+                    description: User ID (ObjectId)
+                    example: 60d0fe4f5311236168a109ca
+                  pet:
+                    type: string
+                    description: Pet ID (ObjectId)
+                    example: 60d0fe4f5311236168a109cb
+                  status:
+                    type: string
+                    description: Status of the adoption
+                    example: completed
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /api/adoptions/{uid}/{pid}:
+    post:
+      tags:
+        - Adoptions
+      summary: Create a new adoption
+      description: Create a new adoption
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          description: User ID
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: Pet ID
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:  
+                    type: string
+                    description: Status of the request
+                    example: success
+                  message:
+                    type: string
+                    description: Message of the request
+                    example: Pet adopted
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
