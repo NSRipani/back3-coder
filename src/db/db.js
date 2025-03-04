@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { connect } from "mongoose";
-dotenv.config()
+dotenv.config();
 
 async function dbConnect() {
     try {

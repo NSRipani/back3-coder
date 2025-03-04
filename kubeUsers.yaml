@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubedeployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: kubeUsers
+  template:
+    metadata:
+      labels:
+        app: kubeUsers
+    spec:
+      containers:
+      - name: pruebafinal
+        image: nsr7/pruebafinal:1.0.0
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MONGO_URL
+          value: "mongodb+srv://nsripani:backend3@dbbackend3coder.wr9ah.mongodb.net/?retryWrites=true&w=majority&appName=DBBackend3Coder"
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-service
+spec:
+  selector:
+    app: kubeUsers
+  ports:
+    - port: 80
+      targetPort: 3000
+      nodePort: 30008 # Puedes cambiarlo por otro número en el rango 30000-32767
+  type: NodePort
