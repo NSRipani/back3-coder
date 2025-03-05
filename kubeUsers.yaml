@@ -16,10 +16,10 @@ spec:
       - name: pruebafinal
         image: nsr7/pruebafinal:1.0.0
         ports:
-        - containerPort: 3000
+          - containerPort: 3000
         env:
-        - name: MONGO_URL
-          value: "mongodb+srv://nsripani:backend3@dbbackend3coder.wr9ah.mongodb.net/?retryWrites=true&w=majority&appName=DBBackend3Coder"
+          - name: MONGO_URL
+            value: "mongodb+srv://nsripani:backend3@dbbackend3coder.wr9ah.mongodb.net/?retryWrites=true&w=majority&appName=DBBackend3Coder"
         imagePullPolicy: Always
 ---
 apiVersion: v1
