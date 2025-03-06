@@ -1,4 +1,3 @@
-// import basename from '../../utils.js';
 import { basename } from './../../utils.js';
 
 export const swaggerOptions = {
@@ -7,8 +6,8 @@ export const swaggerOptions = {
         info: {
             title: 'API',
             version: '1.0.0',
-            description: 'API description'
+            description: 'API documentation: Project API AptopMe',
         }
     },
-    apis: [`${basename}/docs/**/*.yaml`]
+    apis: [`${basename}/src/docs/**/*.yaml`]
 }

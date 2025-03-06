@@ -11,6 +11,6 @@ export const passwordValidation = async (user, password) => bcrypt.compare(passw
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-export const basename = resolve(__dirname, '../');
+export const basename = resolve(__dirname);
 
 export default __dirname;

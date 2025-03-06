@@ -2,7 +2,7 @@ paths:
   /api/users/register/:
     post:
       tags:
-        - Users
+        - Users sessions
       summary: Register a new user
       description: Register a new user
       requestBody:
@@ -33,7 +33,7 @@ paths:
   /api/users/login/:
     post:
       tags:
-        - Users
+        - Users sessions
       summary: User login
       description: User login
       requestBody:
@@ -64,7 +64,7 @@ paths:
   /api/users/current/:
     get:
       tags:
-        - Users
+        - Users sessions
       summary: Get current user
       description: Get current user
       responses:

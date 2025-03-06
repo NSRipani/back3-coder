@@ -11,24 +11,18 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                items:
-                  type: object
-                  properties:
-                    owner:
-                      type: string
-                      description: User ID (ObjectId)
-                      example: 60d0fe4f5311236168a109ca
-                    pet:
-                      type: string
-                      description: Pet ID (ObjectId)
-                      example: 60d0fe4f5311236168a109cb
-                    status:
-                      type: string
-                      description: Status of the adoption
-                      example: completed
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the request
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Adoption'
         '400':
           description: Bad Request
+
   /api/adoption/{aid}:
     get:
       tags:
@@ -39,9 +33,9 @@ paths:
         - in: path
           name: aid
           required: true
-          description: Adoption ID
           schema:
             type: string
+          description: Adoption ID
       responses:
         '200':
           description: A single adoption
@@ -50,18 +44,12 @@ paths:
               schema:
                 type: object
                 properties:
-                  owner:
-                    type: string
-                    description: User ID (ObjectId)
-                    example: 60d0fe4f5311236168a109ca
-                  pet:
-                    type: string
-                    description: Pet ID (ObjectId)
-                    example: 60d0fe4f5311236168a109cb
                   status:
                     type: string
                     description: Status of the adoption
-                    example: completed
+                    example: success
+                  payload:
+                    $ref: '#/components/schemas/Adoption'
         '400':
           description: Bad Request
         '404':
@@ -85,6 +73,12 @@ paths:
           description: Pet ID
           schema:
             type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Adoption'
       responses:
         '201':
           description: Created
@@ -105,3 +99,23 @@ paths:
           description: Bad Request
         '404':
           description: Not Found
+
+components:
+  schemas:
+    Adoption:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Adoption ID
+        owner:
+          type: string
+          description: User ID (ObjectId)
+        pet:
+          type: string
+          description: Pet ID (ObjectId)
+      example:
+        _id: 60d0fe4f5311236168a109cc
+        owner: 60d0fe4f5311236168a109ca
+        pet: 60d0fe4f5311236168a109cb
+        __v: 0
