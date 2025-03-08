@@ -15,14 +15,14 @@ paths:
                 properties:
                   status:
                     type: string
-                    description: Status of the request
+                    description: User ID (ObjectId)
+                    example: completed
                   payload:
                     type: array
                     items:
                       $ref: '#/components/schemas/Adoption'
         '400':
           description: Bad Request
-
   /api/adoption/{aid}:
     get:
       tags:
@@ -44,12 +44,18 @@ paths:
               schema:
                 type: object
                 properties:
+                  owner:
+                    type: string
+                    description: User ID (ObjectId)
+                    example: 60d0fe4f5311236168a109ca
+                  pet:
+                    type: string
+                    description: Pet ID (ObjectId)
+                    example: 60d0fe4f5311236168a109cb
                   status:
                     type: string
                     description: Status of the adoption
-                    example: success
-                  payload:
-                    $ref: '#/components/schemas/Adoption'
+                    example: completed
         '400':
           description: Bad Request
         '404':
@@ -78,7 +84,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Adoption'
+              $ref: '#/components/requestBodies/updatePet'
       responses:
         '201':
           description: Created
@@ -114,6 +120,9 @@ components:
         pet:
           type: string
           description: Pet ID (ObjectId)
+        status:
+          type: object
+          description: Status of the adoption
       example:
         _id: 60d0fe4f5311236168a109cc
         owner: 60d0fe4f5311236168a109ca

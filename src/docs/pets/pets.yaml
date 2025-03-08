@@ -87,7 +87,6 @@ paths:
         '404':
           description: Not Found
 
-  /api/pets/{id}:
     put:
       tags:
         - Pets
@@ -146,6 +145,10 @@ paths:
                     type: string
                     description: Status of the request
                     example: success
+                  message:
+                    type: string
+                    description: Message
+                    example: Pet deleted
         '400':
           description: Bad Request
 
