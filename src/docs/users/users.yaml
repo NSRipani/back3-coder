@@ -29,7 +29,6 @@ paths:
                     example: 5f7f7b7b7b7b7b7b7b7b7b7
         '400':
           description: Invalid input
-          
     get:
       tags:
         - Users
@@ -52,7 +51,6 @@ paths:
                       $ref: '#/components/schemas/Users'
         '400':
           description: Invalid input
-
   /api/users/{uid}:
     get:
       tags:
@@ -82,7 +80,6 @@ paths:
                     $ref: '#/components/schemas/Users'
         '400':
           description: Invalid input
-
     put:
       tags:
         - Users
@@ -92,9 +89,9 @@ paths:
         - in: path
           name: uid
           required: true
-          description: User ID
           schema:
             type: string
+          description: User ID
       requestBody:
         required: true
         content:
@@ -117,7 +114,6 @@ paths:
                     $ref: '#/components/schemas/Users'
         '400':
           description: Invalid input
-
     delete:
       tags:
         - Users
@@ -148,7 +144,6 @@ paths:
                     example: User deleted successfully
         '400':
           description: Invalid input
-
   /api/users/register:
     post:
       tags:
@@ -177,7 +172,6 @@ paths:
                     $ref: '#/components/schemas/Users'
         '400':
           description: Invalid status value
-
   /api/users/login:
     post:
       tags:
@@ -208,7 +202,6 @@ paths:
                     example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
         '400':
           description: Invalid status value
-
   /api/users/current:
     get:
       tags:
@@ -272,7 +265,7 @@ components:
         role: admin
         pets: []
         __v: 0
-
+        
   requestBodies:
     createUser:
       type: object
@@ -306,15 +299,10 @@ components:
         email:
           type: string
           description: User's email
-        password:
-          type: string
-          description: User's password
       example:
         first_name: John
         last_name: Doe
         email: johndoe@gmail.com
-        password: johndoe
-
     registerUser:
       type: object
       properties:
@@ -333,8 +321,8 @@ components:
       example:
         first_name: John
         last_name: Doe
-        email: 'johnDoe@gmail.com'
-
+        email: johnDoe@gmail.com
+        password: securePassword123
     loginUser:
       type: object
       properties:
