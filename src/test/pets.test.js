@@ -1,11 +1,11 @@
 import Pet from '../dao/pet.dao.js';
 import mongoose from "mongoose";
 import { describe, it, before, beforeEach } from "mocha";
-import assert from "assert"; // Importar assert para las afirmaciones en las pruebas
+import assert from "assert"; 
 
 mongoose.connect("mongodb+srv://nsripani:backend3@dbbackend3coder.wr9ah.mongodb.net/?retryWrites=true&w=majority&appName=DBBackend3Coder")
 
-describe("Users DAO", () => {
+describe("Pets DAO", () => {
     before(function(){
         this.petsDao = new Pet();
     })
@@ -16,7 +16,7 @@ describe("Users DAO", () => {
 
     it("El Dao debe poder obtener las mascotas en formato de arreglo",async function(){
         const result = await this.petsDao.get();
-        assert.strictEqual(Array.isArray(result), true); // Afirmar que el resultado es un arreglo
+        assert.strictEqual(Array.isArray(result), true); 
 
     })
     it("El Dao debe agregar correctamente un elemento a la base de datos",async function(){
@@ -26,7 +26,7 @@ describe("Users DAO", () => {
             birthDate: new Date()
         }
         const result = await this.petsDao.save(pet);
-        assert.strictEqual(result.name, pet.name); // Afirmar que el nombre de la mascota guardado coincide
+        assert.strictEqual(result.name, pet.name); 
     })
     it("Al agregar una nueva mascota, éste debe crearse con un arreglo de mascotas vacío por defecto",async function(){
         const pet = {
@@ -35,8 +35,8 @@ describe("Users DAO", () => {
             birthDate: new Date()
         }
         const result = await this.petsDao.save(pet);
-        const raza = await this.petsDao.getBy({ specie: result.specie }) // Obtener usuario por especie
-        assert.strictEqual(raza.specie, result.specie); // Afirmar que la especie de la mascota encontrada coincide
+        const raza = await this.petsDao.getBy({ specie: result.specie })
+        assert.strictEqual(raza.specie, result.specie);
 
     })
 })
