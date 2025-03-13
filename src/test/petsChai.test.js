@@ -9,7 +9,7 @@ describe('Testing Adoptme', () => {
     const petMock = {
         name:"Gala",
         specie:"dog",
-        birthDate:"2018-02-18"
+        birthDate:"2018-02-07"
     }
     describe('Test pets', () => {
         it('Post /api/pets crear una mascota', async () => {
@@ -23,7 +23,7 @@ describe('Testing Adoptme', () => {
 
         })
 
-        it('Post /api/pets/withimage crear una mascota con imagen', async () => {
+        it('Post /api/pets//withimage crear una mascota con imagen', async () => {
             const {statusCode,ok,_body} = await request.post('/api/pets/withimage')
             .field('name',petMock.name)
             .field('specie',petMock.specie)
