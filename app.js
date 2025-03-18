@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import router from './src/routes/index.route.js';
 import dbConnect from './src/db/db.js';
 import { createServer } from 'http';
+import { logger } from './src/utils/logger.js';
 // import cluster from 'cluster';
 // import { cpus } from 'os';
 
@@ -16,7 +17,7 @@ app.use(cookieParser());
 
 const port = process.env.PORT || 3000;
 const ready = () => {
-    console.log("server ready on port " + port);
+    logger.info("server ready on port " + port);
     dbConnect()
 }
 const httpServer = createServer(app);

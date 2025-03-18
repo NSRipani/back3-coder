@@ -1,13 +1,14 @@
 import dotenv from 'dotenv';
 import { connect } from "mongoose";
+import { logger } from '../utils/logger.js';
 dotenv.config();
 
 async function dbConnect() {
     try {
         await connect(process.env.MONGO_URL);
-        console.log("mongo db connected");
+        logger.info("mongo db connected");
     } catch (error) {
-        console.log(error.message);
+        logger.error(error.message);
     }
 }
 

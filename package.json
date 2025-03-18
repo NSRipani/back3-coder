@@ -4,8 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node app.js --logger PRODUCTION",
+    "dev": "nodemon app.js --logger DEVELOPMENT"
   },
   "keywords": [],
   "author": "",

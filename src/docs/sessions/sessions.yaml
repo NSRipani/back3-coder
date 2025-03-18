@@ -1,0 +1,108 @@
+paths:
+  /api/sessions/register:
+    post:
+      tags:
+        - Sessions
+      summary: Register a new user
+      description: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/createUser'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:  
+                    type: string
+                    description: Status of the request
+                    example: success
+                  _id:
+                    type: string
+                    description: User ID
+                    example: 5f7b1b7b7b7b7b7b7b7b7b7b
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /api/sessions/login:
+    post:
+      tags:
+        - Sessions
+      summary: User login
+      description: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/loginUser'
+      responses:
+        '200':
+          description: User logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the request
+                    example: success
+                  token:
+                    type: string
+                    description: Authentication token
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        '400':
+          description: Invalid status value
+  /api/sessions/current:
+    get:
+      tags:
+        - Sessions
+      summary: Get current user
+      description: Get current user
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the request
+                    example: success
+                  users:
+                    $ref: '#/components/schemas/Users'
+        '400':
+          description: Invalid status value
+
+component: 
+  requestBodies:
+    createUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: User's first name
+        last_name:
+          type: string
+          description: User's last name
+        email:
+          type: string
+          description: User's email
+        password:
+          type: string
+          description: User's password
+      example:
+        first_name: John
+        last_name: Doe
+        email: johndoe@gmail.com
+        password: johndoe
