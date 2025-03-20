@@ -23,7 +23,7 @@ paths:
                       $ref: '#/components/schemas/Adoption'
         '400':
           description: Bad Request
-  /api/adoption/{aid}:
+  /api/adoptions/{aid}:
     get:
       tags:
         - Adoptions
@@ -79,12 +79,6 @@ paths:
           description: Pet ID
           schema:
             type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/requestBodies/updatePet'
       responses:
         '201':
           description: Created

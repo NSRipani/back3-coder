@@ -7,14 +7,16 @@ const requester = supertest("http://localhost:3000");
 describe("Router de Adopciones", () => {
     describe("GET /api/adoptions", () => {
         it("Deberia retornar una lista de adopciones", async () => {
-            const {status} = await requester.get("/api/adoptions"); 
-
-            expect(status).to.equal(200); 
+            const res = await requester.get("/api/adoptions"); 
+            expect(res.status).to.equal(200);
+            expect(res.body).to.be.an("object");
+            expect(res.body).to.have.property("payload");
+            expect(res.body.payload).to.be.an("array"); 
         })
 
         it("Retorna 404 si la ruta no existe", async () => {
-            const {status} = await requester.get("/api/adoptions/noexiste");
-            expect(status).to.equal(404); 
+            const res = await requester.get("/api/adoptio/noexiste");
+            expect(res.status).to.equal(404); 
         })  
         
         it("Debería devolver la respuesta como JSON", async () => {
@@ -25,7 +27,7 @@ describe("Router de Adopciones", () => {
     
     describe("GET /api/adoptions/:aid", () => {
         it("Retorna la info de una adopción existente", async () => {
-            let aid = "67d8e99a9e504e350767c05b"; 
+            const aid = "67dc1bcf7fbb33f8eafae8aa"; 
 
             const {status} = await requester.get(`/api/adoptions/${aid}`); 
             expect(status).to.equal(200); 
@@ -33,7 +35,7 @@ describe("Router de Adopciones", () => {
 
         
         it("Retornar 404 si la adopcion no existe", async () => {
-            let noExisteAid = "67626d05a3f6fa3a7145f729"; 
+            const noExisteAid = "67626d05a3f6fa3a7145f729"; 
             const {status} = await requester.get(`/api/adoptions/${noExisteAid}`); 
 
             expect(status).to.equal(404);
@@ -47,7 +49,7 @@ describe("Router de Adopciones", () => {
         });
 
         it("Debería retornar un objeto con los datos de la adopción", async () => {
-            const validAid = "67d8e99a9e504e350767c05b"; 
+            const validAid = "67d8edc19e1a268798b53bf5"; 
             const { body } = await requester.get(`/api/adoptions/${validAid}`);
         
             const adoption = body.payload;
@@ -63,8 +65,8 @@ describe("Router de Adopciones", () => {
     describe("GET /api/adoptions/:uid/:pid", () => {
         it("Crear una adopción", async () => {
             
-            let uid = "67d8e6d579c76808a448f547";
-            let pid = "67d8e1243e250018a29f5988";
+            const uid = "67dc1ac22c38f3431bdd9501";
+            const pid = "67dc1ac32c38f3431bdd9509";
 
             const {status} = await requester.post(`/api/adoptions/${uid}/${pid}`);
 
@@ -72,22 +74,22 @@ describe("Router de Adopciones", () => {
         })
 
         it("Devolver 404 si la mascota no existe", async () => {
-            let nonExistentUid = "6756e6c749392f692fe0fd1d";
-            let nonExistentPid = "000000000000000000000000";
+            const nonExistentUid = "6756e6c749392f692fe0fd1d";
+            const nonExistentPid = "000000000000000000000000";
             const {status} = await requester.post(`/api/adoptions/${nonExistentUid}/${nonExistentPid}`);
             expect(status).to.equal(404);
         });
 
         it("Devolver 404 si el usuario no existe", async () => {
-            let nonExistentUid = "000000000000000000000000";
-            let nonExistentPid = "6756e6c849392f692fe0fd37";
+            const nonExistentUid = "000000000000000000000000";
+            const nonExistentPid = "6756e6c849392f692fe0fd37";
             const {status} = await requester.post(`/api/adoptions/${nonExistentUid}/${nonExistentPid}`);
             expect(status).to.equal(404);
         });
 
         it("Devolver 400 si la mascota ya fue adoptada", async () => {
-            let uid = "67d8e6d579c76808a448f547";
-            let pid = "67d8e1243e250018a29f5988";
+            const uid = "67dc1ac22c38f3431bdd9505";
+            const pid = "67dc1ac22c38f3431bdd9507";
             const {status} = await requester.post(`/api/adoptions/${uid}/${pid}`);
             expect(status).to.equal(400);
         });

@@ -45,7 +45,7 @@ const createPetWithImage = async(req,res) =>{
         name,
         specie,
         birthDate,
-        image:`${__dirname}/../public/img/${file.filename}`
+        image:`${__dirname}/../public/assets/${file.filename}`
     });
     logger.info(pet);
     const result = await petsService.create(pet);

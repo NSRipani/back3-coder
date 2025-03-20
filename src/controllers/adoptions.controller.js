@@ -1,4 +1,5 @@
 import { adoptionsService, petsService, usersService } from '../service/index.js'
+import { logger } from './../utils/logger.js';
 
 const getAllAdoptions = async(req,res)=>{
     const result = await adoptionsService.getAll();
@@ -6,10 +7,15 @@ const getAllAdoptions = async(req,res)=>{
 }
 
 const getAdoption = async(req,res)=>{
-    const adoptionId = req.params.aid;
-    const adoption = await adoptionsService.getBy({_id:adoptionId})
-    if(!adoption) return res.status(404).send({status:"error",error:"Adoption not found"})
-    res.send({status:"success",payload:adoption})
+    try {
+        const adoptionId = req.params.aid;
+        const adoption = await adoptionsService.getBy({_id:adoptionId})
+        if(!adoption) return res.status(404).send({status:"error",error:"Adoption not found"})
+        res.send({status:"success",payload:adoption})
+    } catch (error) {
+        logger.error(error)
+        res.status(500).send({status:"error",error:"Internal server error"})
+    }
 }
 
 const createAdoption = async(req,res)=>{
@@ -24,6 +30,7 @@ const createAdoption = async(req,res)=>{
     await petsService.update(pet._id,{adopted:true,owner:user._id})
     await adoptionsService.create({owner:user._id,pet:pet._id})
     res.send({status:"success",message:"Pet adopted"})
+    logger.info(`User ${user._id} adopted pet ${pet._id}`)
 }
 
 export default {
