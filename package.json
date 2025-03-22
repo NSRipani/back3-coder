@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node app.js --logger PRODUCTION",
-    "dev": "nodemon app.js --logger DEVELOPMENT",
-    "test": "mocha ./test/**/*.js"
+    "dev": "nodemon app.js --logger DEVELOPMENT"
   },
   "keywords": [],
   "author": "",
