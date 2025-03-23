@@ -65,8 +65,8 @@ describe("Router de Adopciones", () => {
     describe("GET /api/adoptions/:uid/:pid", () => {
         it("Crear una adopción", async () => {
             
-            const uid = "67ddb60bb2fa9a7f4bc21823";
-            const pid = "67ddb60bb2fa9a7f4bc2182d";
+            const uid = "67df544483f648c73f57f408";
+            const pid = "67df544583f648c73f57f414";
 
             const {status} = await requester.post(`/api/adoptions/${uid}/${pid}`);
 
@@ -88,8 +88,8 @@ describe("Router de Adopciones", () => {
         });
 
         it("Devolver 400 si la mascota ya fue adoptada", async () => {
-            const uid = "67ddb60ab2fa9a7f4bc2181f";
-            const pid = "67ddb60bb2fa9a7f4bc21829";
+            const uid = "67df544483f648c73f57f408";
+            const pid = "67df544583f648c73f57f414";
             const {status} = await requester.post(`/api/adoptions/${uid}/${pid}`);
             expect(status).to.equal(400);
         });

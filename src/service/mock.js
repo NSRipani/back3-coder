@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { createHash } from "../../utils.js";
+import uploader from '../utils/multer.js';
 
 class ServiceMock{
     static async generateMockingPets(num) {
